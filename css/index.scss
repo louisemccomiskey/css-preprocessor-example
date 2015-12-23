@@ -1,0 +1,293 @@
+/* Variables */
+$layerZindex: (
+    base: 0,
+    first: 10
+);
+
+$bps: (
+    small: 480px,
+    mid: 568px,
+    large: 960px
+);
+
+$siteMaxWidth: 980px;
+/* End Variables */
+
+/* MIXINS */
+
+// mixin for all breakpoints makes it easier to manage if the size needs changed.
+@mixin bp($point) {
+    // 640 -->
+    @if $point == small {
+        @media (min-width: map-get($bps, small)) { @content; }
+    }
+  
+    @elseif $point == mid {
+        @media (min-width: map-get($bps, mid)) { @content; }
+    }
+
+    @elseif $point == large {
+        @media (min-width: map-get($bps, large)) { @content; }
+    }
+}
+
+//  To help with creating a scalable element within an aspect ratio.
+//  Default is 100% making a square,
+//  Set height:auto; on any element you are adding this too.
+@mixin before-aspect-ratio-custom($paddingBottom: 100%) {
+
+    &:before {
+        content: '';
+        display: block;
+        height: 0;
+        width: 100%;
+        padding-bottom: $paddingBottom;
+    }
+}
+/* END MIXINS */
+
+body {
+  margin: 0;
+  padding:0;
+}
+  
+.pg-home {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.hero {
+  background: rgba(green, 0.4);
+  min-height: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* aligns items horizontally when direction is row*/
+  align-items: center; /* aligns items vertically when direction is row*/
+}
+
+.zone-1 {
+  background: rgba(purple, 0.3);
+  height: auto;
+  
+  @include bp(mid) {
+    height: 300px;
+  }
+}
+
+.grid-ctn {
+  max-width: $siteMaxWidth;
+  margin: 0 auto;
+  list-style-type: none;
+  height: auto;
+  padding:0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  padding: 0 50px;
+  box-sizing: border-box;
+  
+  @include bp(mid) {
+    height: 100%;
+  }
+}
+
+.grid-item {
+  position: relative; /* needed to position the absolutely positioned .signature relative too */
+  outline: 1px solid black;
+  width: 100%; /* 1 column grid */
+  height: 200px; 
+  
+  @include bp(small) {
+    width: 50%; /* 2 column grid */
+  }
+  
+  @include bp(mid) {
+    flex: 1; /* 4 four column grid */
+    width: auto;
+    height: 80%;
+  }
+  
+  &:nth-child(1) { /* would use classes in production in case the order changes */
+    background: rgba(orange, 0.75);
+    @include bp(mid) {
+      top: -5%;
+    }
+  }
+  
+  &:nth-child(2){
+    background: rgba(red, 0.75);
+   
+    @include bp(mid) {
+      top: 25%;
+      height: 50%;
+    }
+  }
+  
+  &:nth-child(3){
+    background: rgba(orange, 0.75);
+ 
+    @include bp(mid) {
+      top: -25%;
+    }
+  }
+  
+  &:nth-child(4){
+    background: rgba(red, 0.75);
+    
+    @include bp(mid) {
+      top: 15%;
+    }
+  }
+}
+
+.signature {
+  background: pink;
+  width: 40%;
+  height: 10%;
+  position: absolute;
+  bottom: -5%;
+  right: -5%;
+  z-index: map-get($layerZindex, first);
+}
+
+.zone-2 {
+  background: oldLace;
+  min-height: 500px;
+  display: flex; 
+  flex-direction: column; /* puts .heading and .zone-2--inner one above another */
+  align-content: stretch;
+}
+
+.heading {
+  height: 60px;
+  width: 100%;
+  background: rgba(yellow, 0.3);
+  /* flex used here to vertically and horizontally center text*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zone-2--inner {
+  max-width: $siteMaxWidth;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  height: auto;
+  display: flex;
+  align-self: center; /* horizontally center */
+  margin-top: 20px;
+  
+  @include bp(mid) {
+     flex: 1; /* take up the full width of parent */
+    position: relative; /* needed to absolutely position the shape elements relative to. */
+  }
+  
+}
+
+.grid-ctn-2 {
+  list-style-type: none;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin:0;
+  
+  .grid-item {
+    width: 100%;
+    flex: 1 0 auto;/* grow, shrink, basis */
+    
+    &.item-box {
+      background: rgba(blue, 0.4);
+      outline: 1px dashed blue;
+      height: 200px;
+
+     @include bp(mid) {
+        width: 50%;
+        height: auto;
+      }
+    }
+    
+    &.item-shape {
+      position: static;
+      margin: 5px 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      box-sizing: border-box;
+      
+      @include bp(mid) {
+        position: absolute;
+        margin:0;
+        z-index: map-get($layerZindex, first); /* we have 2 zindex layers, the shapes need to sit on the higher ones */
+      }
+    }
+  
+    &.shape-rectangle {
+        background: yellow;
+        width: 40%;
+        height: 60px;
+        
+        @include bp(mid) {
+          margin-left: -20%;
+          top: -20px;
+          left: 50%;
+        }
+    }
+  
+    &.shape-oblong {
+        background: #0099FF;
+        width: 150px;
+        height: 200px;
+        
+        @include bp(mid) {
+          top: 60%;
+          left: 0;
+        }
+    }
+  
+    &.shape-circle {
+        margin: 5px 0;
+      
+        .item-inner {
+          width: 50%;
+          @include before-aspect-ratio-custom();
+          background: #00CC99;
+          border-radius: 50%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          
+          @include bp(mid) {
+            width: 100%;
+          }
+          
+          &:before {
+            flex:0;
+          }
+          
+          p {
+            align-self: center;
+          }
+        }
+        
+        @include bp(mid) {
+          top: 50%;
+          left: 25%;
+          width: 150px;
+          height: 150px;
+        }
+    }
+  }
+}
+
+
+
+h1, h2, p {
+  margin:0;
+  padding:0;
+}

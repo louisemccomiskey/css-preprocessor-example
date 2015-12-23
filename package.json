@@ -1,0 +1,25 @@
+{
+  "name": "css-preprocessor-example",
+  "version": "1.0.0",
+  "description": "Tiny repo to get setup with compiling scss to css quickly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass --include-path scss css/index.scss   dist/css/index.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louisemccomiskey/css-preprocessor-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/louisemccomiskey/css-preprocessor-example/issues"
+  },
+  "homepage": "https://github.com/louisemccomiskey/css-preprocessor-example#readme",
+  "devDependencies": {
+    "node-sass": "^3.4.2",
+    "nodemon": "^1.8.1"
+  }
+}

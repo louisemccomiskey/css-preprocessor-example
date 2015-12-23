@@ -1,0 +1,212 @@
+/* Variables */
+/* End Variables */
+/* MIXINS */
+/* END MIXINS */
+body {
+  margin: 0;
+  padding: 0; }
+
+.pg-home {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px; }
+
+.hero {
+  background: rgba(0, 128, 0, 0.4);
+  min-height: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* aligns items horizontally when direction is row*/
+  align-items: center;
+  /* aligns items vertically when direction is row*/ }
+
+.zone-1 {
+  background: rgba(128, 0, 128, 0.3);
+  height: auto; }
+  @media (min-width: 568px) {
+    .zone-1 {
+      height: 300px; } }
+
+.grid-ctn {
+  max-width: 980px;
+  margin: 0 auto;
+  list-style-type: none;
+  height: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 50px;
+  box-sizing: border-box; }
+  @media (min-width: 568px) {
+    .grid-ctn {
+      height: 100%; } }
+
+.grid-item {
+  position: relative;
+  /* needed to position the absolutely positioned .signature relative too */
+  outline: 1px solid black;
+  width: 100%;
+  /* 1 column grid */
+  height: 200px; }
+  @media (min-width: 480px) {
+    .grid-item {
+      width: 50%;
+      /* 2 column grid */ } }
+  @media (min-width: 568px) {
+    .grid-item {
+      flex: 1;
+      /* 4 four column grid */
+      width: auto;
+      height: 80%; } }
+  .grid-item:nth-child(1) {
+    /* would use classes in production in case the order changes */
+    background: rgba(255, 165, 0, 0.75); }
+    @media (min-width: 568px) {
+      .grid-item:nth-child(1) {
+        top: -5%; } }
+  .grid-item:nth-child(2) {
+    background: rgba(255, 0, 0, 0.75); }
+    @media (min-width: 568px) {
+      .grid-item:nth-child(2) {
+        top: 25%;
+        height: 50%; } }
+  .grid-item:nth-child(3) {
+    background: rgba(255, 165, 0, 0.75); }
+    @media (min-width: 568px) {
+      .grid-item:nth-child(3) {
+        top: -25%; } }
+  .grid-item:nth-child(4) {
+    background: rgba(255, 0, 0, 0.75); }
+    @media (min-width: 568px) {
+      .grid-item:nth-child(4) {
+        top: 15%; } }
+
+.signature {
+  background: pink;
+  width: 40%;
+  height: 10%;
+  position: absolute;
+  bottom: -5%;
+  right: -5%;
+  z-index: 10; }
+
+.zone-2 {
+  background: oldLace;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  /* puts .heading and .zone-2--inner one above another */
+  align-content: stretch; }
+
+.heading {
+  height: 60px;
+  width: 100%;
+  background: rgba(255, 255, 0, 0.3);
+  /* flex used here to vertically and horizontally center text*/
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.zone-2--inner {
+  max-width: 980px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  height: auto;
+  display: flex;
+  align-self: center;
+  /* horizontally center */
+  margin-top: 20px; }
+  @media (min-width: 568px) {
+    .zone-2--inner {
+      flex: 1;
+      /* take up the full width of parent */
+      position: relative;
+      /* needed to absolutely position the shape elements relative to. */ } }
+
+.grid-ctn-2 {
+  list-style-type: none;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0; }
+  .grid-ctn-2 .grid-item {
+    width: 100%;
+    flex: 1 0 auto;
+    /* grow, shrink, basis */ }
+    .grid-ctn-2 .grid-item.item-box {
+      background: rgba(0, 0, 255, 0.4);
+      outline: 1px dashed blue;
+      height: 200px; }
+      @media (min-width: 568px) {
+        .grid-ctn-2 .grid-item.item-box {
+          width: 50%;
+          height: auto; } }
+    .grid-ctn-2 .grid-item.item-shape {
+      position: static;
+      margin: 5px 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      box-sizing: border-box; }
+      @media (min-width: 568px) {
+        .grid-ctn-2 .grid-item.item-shape {
+          position: absolute;
+          margin: 0;
+          z-index: 10;
+          /* we have 2 zindex layers, the shapes need to sit on the higher ones */ } }
+    .grid-ctn-2 .grid-item.shape-rectangle {
+      background: yellow;
+      width: 40%;
+      height: 60px; }
+      @media (min-width: 568px) {
+        .grid-ctn-2 .grid-item.shape-rectangle {
+          margin-left: -20%;
+          top: -20px;
+          left: 50%; } }
+    .grid-ctn-2 .grid-item.shape-oblong {
+      background: #0099FF;
+      width: 150px;
+      height: 200px; }
+      @media (min-width: 568px) {
+        .grid-ctn-2 .grid-item.shape-oblong {
+          top: 60%;
+          left: 0; } }
+    .grid-ctn-2 .grid-item.shape-circle {
+      margin: 5px 0; }
+      .grid-ctn-2 .grid-item.shape-circle .item-inner {
+        width: 50%;
+        background: #00CC99;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; }
+        .grid-ctn-2 .grid-item.shape-circle .item-inner:before {
+          content: '';
+          display: block;
+          height: 0;
+          width: 100%;
+          padding-bottom: 100%; }
+        @media (min-width: 568px) {
+          .grid-ctn-2 .grid-item.shape-circle .item-inner {
+            width: 100%; } }
+        .grid-ctn-2 .grid-item.shape-circle .item-inner:before {
+          flex: 0; }
+        .grid-ctn-2 .grid-item.shape-circle .item-inner p {
+          align-self: center; }
+      @media (min-width: 568px) {
+        .grid-ctn-2 .grid-item.shape-circle {
+          top: 50%;
+          left: 25%;
+          width: 150px;
+          height: 150px; } }
+
+h1, h2, p {
+  margin: 0;
+  padding: 0; }
